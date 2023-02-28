@@ -39,19 +39,21 @@ p {
     justify-content: center;
 }
 
-#button {
+.button {
 	color: white;
     background: black;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 2em;
+    font-size: 0.75rem;
     width: 150px;
     height: 50px;
 	border-radius: 2px;
 	transition: .2s ease-in-out;
 }
 
-#button:hover {
+.button:hover {
 	border-radius: 30px;
     cursor: pointer;
 }
@@ -59,5 +61,13 @@ p {
 @media screen and (max-width:575px) {
     body {
         font-size: 12px;
+    }
+
+    .button-wrapper {
+        flex-direction: column;
+    }
+
+    .button {
+        margin: 1em 0;
     }
 }

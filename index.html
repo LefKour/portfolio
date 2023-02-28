@@ -19,15 +19,22 @@
         <p>computational designer + software developer</p>
         <h2>Website Under Construction</h2>
         <div class="button-wrapper">
-            <div id="button">
+            <div id="email-button" class="button">
                 Get in touch!
+            </div>
+
+            <div id="portfolio-button" class="button">
+                Download Portfolio!
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('button').addEventListener('click',() => 
+        document.getElementById('email-button').addEventListener('click',() => 
         window.location.href = "mailto:lefterkour@hotmail.com");
+    
+        document.getElementById('portfolio-button').addEventListener('click',() => 
+        window.location = "https://github.com/LefKour/portfolio/blob/main/Portfolio%20_%20Eleftherios%20Kourkopoulos.pdf?raw=true");        
     </script>
 </body>
 </html>
