@@ -1,0 +1,41 @@
+.portfolio-grid-entry {
+  &__container {
+    border: white solid 0.25px;
+    border-top:none;
+    border-right:none;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+
+    width: 100%;
+
+    overflow: auto;
+
+    box-shadow: inset rgba(60, 70, 85, 255) 0px 0px 40px 0px, rgba(0, 0, 0, 255) 0px 30px 100px -24px;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__info-card {  width:100px;
+      height:100px;
+      position: absolute;
+      background: #111;
+    }
+
+    &:hover {
+      color: black;
+      scale: 1.025 1.025;
+      border-radius: 8px;
+
+      transition: linear 0.2s;
+      z-index:1;
+
+      perspective: 25rem;
+    }
+  }
+}
