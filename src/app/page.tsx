@@ -1,27 +1,28 @@
-'use client';
+import Head from "next/head";
 
-import WebGLCanvas from '@/components/WebGLCanvas';
-import WaveEffectScene from "@/lib/scenes/WaveEffectScene";
+import NavBar from '@/components/NavBar';
 
 export default function Home() {
+  return (<>
+    {/*Head*/}
+    <Head>
+        <title>Eleftherios Kourkopoulos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </Head>
 
-  return (
-      <div className="flex flex-col items-center min-h-screen bg-gray-900 text-white p-8">
-        <h1 className="text-3xl font-bold mb-6">WebGL Wave Effect</h1>
-        <div className="w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl">
-          <WebGLCanvas
-              sceneClass={WaveEffectScene}
-              height={500}
-              className="w-full"
-          />
+    {/*NavBar*/}
+    <NavBar/>
+
+    <div className='w-screen h-screen flex justify-center items-center'>
+        <div className='flex-col items-center justify-center'>
+            <h1 className='text-[4rem]'>Eleftherios Kourkopoulos</h1>
+            <div className='flex w-full justify-between items-center gap-5 '>
+                <h3>Software Developer</h3>
+                <div className='h-[1px] flex-grow bg-white rounded-full' />
+                <p className='italic text-end'>bringing exceptional <br /> experiences to life</p>
+            </div>
         </div>
-        <div className="mt-8 max-w-4xl text-gray-300">
-          <h2 className="text-xl font-semibold mb-4">About This Demo</h2>
-          <p>
-            This example demonstrates a simple wave effect created using WebGL shaders.
-            The effect uses sine waves to distort UV coordinates and create an animated pattern.
-          </p>
-        </div>
-      </div>
-  );
+    </div>
+
+  </>);
 }
