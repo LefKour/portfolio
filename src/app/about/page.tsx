@@ -1,10 +1,12 @@
-import NavBar from "@/components/NavBar";
+import NavBar from "@/app/(components)/NavBar";
 
 const About = () => {
     return (<>
-        <NavBar />
-
-        <p>About</p>
+        <div className='w-screen h-screen bg-linear-to-t from-black-500 to-orange-900 flex justify-center items-center'>
+            <div className='flex-col items-center justify-center'>
+                <h1 className='text-[4rem]'>About</h1>
+            </div>
+        </div>
     </>);
 };
 
