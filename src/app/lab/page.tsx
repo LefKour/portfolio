@@ -1,11 +1,26 @@
-import NavBar from "@/app/(components)/NavBar";
+import DotGrid from "@/app/(components)/DotGrid";
+import PressureText from "@/app/(components)/PressureText";
 
 const Lab = () => {
     return (<>
-        <div className='w-screen h-screen bg-linear-to-t from-black-500 to-orange-900 flex justify-center items-center'>
-            <div className='flex-col items-center justify-center'>
-                <h1 className='text-[4rem]'>Lab</h1>
+        <div className='w-screen h-screen flex justify-center items-center'>
+
+            <DotGrid />
+
+            <div
+                className='flex-col items-center justify-center relative z-10 pt-0 pb-2 pr-10 pl-10 bg-white/10 rounded-xl drop-shadow-xl backdrop-blur-md z-50'>
+                <PressureText
+                    text='Lab'
+                    flex={false}
+                    alpha={false}
+                    stroke={false}
+                    width={true}
+                    weight={true}
+                    italic={true}
+                    strokeColor={'#ffffff'}
+                />
             </div>
+
         </div>
     </>);
 };
