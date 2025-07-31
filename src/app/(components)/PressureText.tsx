@@ -18,6 +18,7 @@ interface PressureTextProps {
     className?: string;
     minFontSize?: number;
     textSizeRem?: number;
+    onClick?: () => void;
 }
 
 
@@ -38,6 +39,7 @@ const PressureText = ({
                           className = '',
                           minFontSize = 24,
                           textSizeRem = 4,
+                          onClick
 }: PressureTextProps) => {
 
     // Refs
@@ -96,14 +98,28 @@ const PressureText = ({
             cursorRef.current.x = e.clientX;
             cursorRef.current.y = e.clientY;
         };
+        
         const handleTouchMove = (e: TouchEvent) => {
             const t = e.touches[0];
             cursorRef.current.x = t.clientX;
             cursorRef.current.y = t.clientY;
         };
+        
+        const handleTouchStart = (e: TouchEvent) => {
+            const t = e.touches[0];
+            cursorRef.current.x = t.clientX;
+            cursorRef.current.y = t.clientY;
+            setIsHovering(true);
+        };
+        
+        const handleTouchEnd = () => {
+            setIsHovering(false);
+        };
 
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: false });
+        window.addEventListener('touchend', handleTouchEnd);
 
         if (containerRef.current) {
             const { left, top, width, height } = containerRef.current.getBoundingClientRect();
@@ -116,6 +132,8 @@ const PressureText = ({
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchend', handleTouchEnd);
         };
     }, []);
 
@@ -216,6 +234,7 @@ const PressureText = ({
             className="relative w-full h-full overflow-hidden bg-transparent"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
+            onClick={() => onClick ? onClick() : undefined }
         >
             <style>{`
                 @import url('${fontUrl}');

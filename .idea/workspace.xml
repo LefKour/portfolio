@@ -5,15 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e06cead2-9e27-47ea-9bac-61bd971e49a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/(components)/DotGrid.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(components)/MenuItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/hooks/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/hooks/useDeviceDetection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/utils/deviceUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(components)/DotGrid.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(components)/PressureText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/PressureText.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/contact/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/lab/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/lab/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/projects/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/projects/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/projects/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/work/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +112,9 @@
       <workItem from="1753472670028" duration="1052000" />
       <workItem from="1753527060327" duration="8794000" />
       <workItem from="1753611127280" duration="4108000" />
+      <workItem from="1753988865427" duration="10185000" />
+      <workItem from="1753999377388" duration="678000" />
+      <workItem from="1754000079436" duration="2309000" />
     </task>
     <servers />
   </component>
