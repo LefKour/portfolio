@@ -21,6 +21,44 @@ const NavBar = () => {
     const [location, setLocation] = useState<string>('');
     const [currentTime, setCurrentTime] = useState<string>('');
 
+    // Disable scroll when mobile menu is open
+    useEffect(() => {
+        if (isMobile && isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+        };
+    }, [isMobile, isMenuOpen]);
+
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (isMenuOpen) {
+                const target = event.target as HTMLElement;
+                // Check if click is outside menu and menu button
+                const isMenuClick = target.closest('[data-menu-container]');
+                const isMenuButtonClick = target.closest('[data-menu-button]');
+                
+                if (!isMenuClick && !isMenuButtonClick) {
+                    setIsMenuOpen(false);
+                }
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isMenuOpen]);
+
     const latitude = 51.5074;
     const longitude = -0.1278;
 
@@ -122,6 +160,7 @@ const NavBar = () => {
 
                 {/*Menu Button*/}
                 <motion.button
+                    data-menu-button
                     className={`flex justify-center items-center gap-10 ${isMobile ? "p-3" : "px-5 py-3"} border`}
                     onHoverStart={() => setIsMenuHovered(true)}
                     onHoverEnd={() => setIsMenuHovered(false)}
@@ -241,14 +280,15 @@ const NavBar = () => {
 
             {/* Menu */}
             <motion.div
+                data-menu-container
                 className={`${isMobile ? 
-                    "absolute w-screen h-screen bg-linear-to-t from-black/20 to-white/10 backdrop-blur" :
+                    "fixed inset-0 w-screen h-screen bg-linear-to-t from-black/20 to-white/10 backdrop-blur z-50" :
                     "flex flex-col gap-3 w-fit"
                 }`}
                 initial={{ opacity: 0, y: 0, height: 0 }}
                 animate={{ 
                     opacity: isMenuOpen ? 1 : 0, 
-                    y: isMenuOpen ? (isCrossHovered ? 1 : 0) : -20,
+                    y: isMenuOpen ? (isCrossHovered && !isMobile ? 1 : 0) : -20,
                     height: isMenuOpen ? 'auto' : 0,
                 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -257,18 +297,76 @@ const NavBar = () => {
                     pointerEvents: isMenuOpen ? 'auto' : 'none'
                 }}
             >
-                { isMobile && <motion.div>X</motion.div> }
+                {isMobile &&
+                    <motion.button
+                        data-menu-button
+                        className={`absolute top-24 right-4 flex justify-center items-center gap-10 ${isMobile ? "p-3" : "px-5 py-3"} border`}
+                        onHoverStart={() => setIsMenuHovered(true)}
+                        onHoverEnd={() => setIsMenuHovered(false)}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        animate={{
+                            backgroundColor:
+                                isMobile ?
+                                    isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(255,255,255, 0.2)' :
+                                    isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(10,10,10,1)',
+                        }}
+                        transition={{duration: 0.2, ease: "easeInOut"}}
+                    >
+                        {/* Menu Text */}
+                        {!isMobile && <motion.span
+                            className={`${isMenuOpen ? 'text-black' : 'text-white'} text-sm strong`}
+                            animate={{
+                                opacity: isMenuHovered ? 1 : 0.8,
+                            }}
+                            transition={{duration: 0.2}}
+                        >
+                            {isMenuOpen ? 'close' : 'menu'}
+                        </motion.span>}
+
+                        {/* Menu Icon */}
+                        <motion.div
+                            className='relative w-5 h-5 flex items-center justify-center'
+                            animate={{rotate: isMenuOpen ? 180 : 0}}
+                            transition={{duration: 0.3, ease: "easeInOut"}}
+                        >
+                            <motion.div
+                                className={`absolute w-full h-0.5 ${isMenuOpen ? 'bg-black' : 'bg-white'}`}
+                                animate={{
+                                    rotate: isMenuOpen ? 45 : 0,
+                                    y: isMenuOpen ? 0 : -6,
+                                }}
+                                transition={{duration: 0.3, ease: "easeInOut"}}
+                            />
+                            <motion.div
+                                className={`absolute w-full h-0.5 ${isMenuOpen ? 'bg-black' : 'bg-white'}`}
+                                animate={{
+                                    opacity: isMenuOpen ? 0 : 1,
+                                    scaleX: isMenuOpen ? 0 : 1,
+                                }}
+                                transition={{duration: 0.2, ease: "easeInOut"}}
+                            />
+                            <motion.div
+                                className={`absolute w-full h-0.5 ${isMenuOpen ? 'bg-black' : 'bg-white'}`}
+                                animate={{
+                                    rotate: isMenuOpen ? -45 : 0,
+                                    y: isMenuOpen ? 0 : 6,
+                                }}
+                                transition={{duration: 0.3, ease: "easeInOut"}}
+                            />
+                        </motion.div>
+                    </motion.button>
+                }
 
                 <motion.div className=
-                            {`${isMobile ?
-                                "w-screen h-screen flex flex-col items-center justify-center gap-2" :
-                                "grid grid-cols-2 gap-4"
-                            }`}>
+                                {`${isMobile ?
+                                    "w-screen h-screen flex flex-col items-center justify-center gap-2" :
+                                    "grid grid-cols-2 gap-4"
+                                }`}>
                     {[
-                        { name: 'about.', path: '/about' },
-                        { name: 'work.', path: '/work' },
-                        { name: 'lab', path: '/lab' },
-                        { name: 'contact', path: '/contact' }
+                        {name: 'about.', path: '/about'},
+                        {name: 'work.', path: '/work'},
+                        {name: 'lab', path: '/lab'},
+                        {name: 'contact', path: '/contact'}
                     ].map((item, index) => (
                         <MenuItem
                             key={item.name}

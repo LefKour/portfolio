@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import NavBar from "@/app/(components)/NavBar";
+import Cursor from "@/app/(components)/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,9 @@ export default function RootLayout({
 
           {/*NavBar*/}
           <NavBar/>
+
+          {/*Custom Cursor*/}
+          <Cursor/>
 
           {children}
       </body>
