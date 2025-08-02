@@ -1,23 +1,12 @@
-import PressureText from "@/app/(components)/PressureText";
+'use client'
+import {useDeviceDetection} from "@/lib/hooks";
+import PagePlaceholder from "@/app/(containers)/PagePlaceholder";
 
 const Projects = () => {
-    return (<>
-        <div className='w-screen h-screen flex justify-center items-center'>
-            <div
-                className='flex-col items-center justify-center relative z-10 pt-0 pb-2 pr-10 pl-10 bg-white/10 rounded-xl drop-shadow-xl backdrop-blur-md z-50'>
-                <PressureText
-                    text='Work'
-                    flex={false}
-                    alpha={false}
-                    stroke={false}
-                    width={true}
-                    weight={true}
-                    italic={true}
-                    strokeColor={'#ffffff'}
-                />
-            </div>
+    const {isMobile} = useDeviceDetection();
 
-        </div>
+    return (<>
+        <PagePlaceholder pageTitle={'Work'} titleSize={(isMobile ? 12: 24)} />
     </>);
 };
 

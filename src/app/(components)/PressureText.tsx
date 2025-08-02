@@ -231,7 +231,7 @@ const PressureText = ({
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full overflow-hidden bg-transparent"
+            className="relative w-full overflow-hidden bg-transparent p-0 m-0"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             onClick={() => onClick ? onClick() : undefined }
@@ -256,7 +256,7 @@ const PressureText = ({
 
             <h1
                 ref={titleRef}
-                className={`text-pressure-title ${className} ${stroke ? 'stroke' : ''} uppercase text-left flex flex-wrap justify-start gap-x-4`}
+                className={`text-pressure-title p-0 ${stroke ? 'stroke' : ''} uppercase ${className}`}
                 style={{
                     fontFamily,
                     fontSize: fontSize,
@@ -277,9 +277,12 @@ const PressureText = ({
                                     key={`${wordIndex}-${charIndex}`}
                                     ref={(el: any) => (spansRef.current[globalIndex] = el)}
                                     data-char={char}
-                                    className="inline-block bold"
+                                    className="inline-block bold p-0 m-0"
                                     style={{ 
-                                        fontSize: `${responsiveSize}rem`
+                                        fontSize: `${responsiveSize}rem`,
+                                        lineHeight: 1,
+                                        padding: 0,
+                                        margin: 0
                                     }}
                                 >
                                     {char}

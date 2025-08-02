@@ -45,7 +45,6 @@ const NavBar = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (isMenuOpen) {
                 const target = event.target as HTMLElement;
-                // Check if click is outside menu and menu button
                 const isMenuClick = target.closest('[data-menu-container]');
                 const isMenuButtonClick = target.closest('[data-menu-button]');
                 
@@ -80,7 +79,7 @@ const NavBar = () => {
             }
         };
 
-        getLocationFromCoords();
+        getLocationFromCoords().then(r => {});
     }, [latitude, longitude]);
 
     useEffect(() => {
@@ -101,16 +100,16 @@ const NavBar = () => {
     }, []);
 
     return (
-        <div className={`fixed z-100 w-full flex ${isMobile ? "": "p-4"} flex-col gap-4`}>
+        <div className={`fixed z-100 w-full flex ${isMobile ? "": "p-4"} flex-col gap-4 select-none`}>
 
             {/*Core Navbar*/}
             { !(isMobile && isMenuOpen) && <div
                 className={`flex items-center justify-between max-w-[800px] relative
                  backdrop-blur-md bg-linear-to-t from-black/5 to-white/5 p-4 
-                 ${isMobile ? "pt-16 border-b": "border"} border-[#555] gap-8`}>
+                 ${isMobile ? "pt-16 border-b": "border"} border-[#555] gap-8 select-none`}>
 
                 {/*Header*/}
-                <div className='flex items-center justify-center cursor-pointer gap-2'>
+                <div className='flex items-center justify-center cursor-pointer gap-2 select-none'>
 
                     {/*Cross Icon*/}
                     { !isMobile && <motion.div
@@ -142,20 +141,23 @@ const NavBar = () => {
                     </motion.div> }
 
                     {/*Name*/}
-                    <PressureText
-                        text='Eleftherios Kourkopoulos'
-                        flex={false}
-                        alpha={false}
-                        stroke={false}
-                        width={true}
-                        weight={true}
-                        italic={true}
-                        strokeColor={router ? '#ffffff' : '#ff0000'}
-                        textSizeRem={1.5}
-                        onClick={() => {
-                            router?.push('/')
-                        }}
-                    />
+                    { isMobile ?
+                        <h2 onClick={() => router?.push('/')}>ELEFTHERIOS KOURKOPOULOS</h2>:
+                        <PressureText
+                            text='Eleftherios Kourkopoulos'
+                            flex={false}
+                            alpha={false}
+                            stroke={false}
+                            width={true}
+                            weight={true}
+                            italic={true}
+                            strokeColor={router ? '#ffffff' : '#ff0000'}
+                            textSizeRem={1.5}
+                            onClick={() => {
+                                router?.push('/')
+                            }}
+                        />
+                    }
                 </div>
 
                 {/*Menu Button*/}

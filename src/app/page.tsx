@@ -1,36 +1,31 @@
 'use client'
-import PressureText from "@/app/(components)/PressureText";
-import { useDeviceDetection } from "@/lib/hooks/useDeviceDetection";
+
+import WorkSection from "@/app/(containers)/WorkSection";
+import HeroSection from "@/app/(containers)/HeroSection";
+import AboutSection from "@/app/(containers)/AboutSection";
+import ContactSection from "@/app/(containers)/ContactSection";
+import GetInTouchWidget from "@/app/(components)/GetInTouchWidget";
+import PhilosophySection from "@/app/(containers)/PhilosophySection";
+
 
 export default function Home() {
 
       return (<>
-            {/*Hero Section*/}
-            <div className='w-screen h-screen flex justify-center items-center m-0 p-0'>
+          {/* Hero Section */}
+          <HeroSection />
 
-                <div className='flex-col items-center justify-center m-10 relative z-10'>
-                    {/*Main Title*/}
-                    <PressureText
-                        text='Eleftherios Kourkopoulos'
-                        flex={false}
-                        alpha={false}
-                        stroke={false}
-                        width={true}
-                        weight={true}
-                        italic={true}
-                        strokeColor={'#ffffff'}
-                    />
+          {/* Philosophy */}
+          <PhilosophySection />
 
-                    <div className={`flex w-full justify-between items-center gap-6`}>
-                        <h3>Software Developer</h3>
-                        <div className='h-[1px] flex-grow bg-white rounded-full'/>
-                        <p className={`italic text-end`}>working at the intersection of <br/> design and technology</p>
-                    </div>
+          {/* About */}
+          <AboutSection />
 
-                </div>
-            </div>
+          {/* Work */}
+          <WorkSection />
 
-          {/*Another Section*/}
-        <div className='w-screen h-screen flex justify-center items-center'/>
-  </>);
+          {/* Contact */}
+          <ContactSection />
+
+          <GetInTouchWidget />
+      </>);
 }

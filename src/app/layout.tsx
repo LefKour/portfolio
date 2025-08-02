@@ -4,6 +4,7 @@ import "./globals.css";
 import Head from "next/head";
 import NavBar from "@/app/(components)/NavBar";
 import Cursor from "@/app/(components)/Cursor";
+import Footer from "@/app/(components)/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,25 +27,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
 
-          {/*Head*/}
-          <Head>
-              <title>Eleftherios Kourkopoulos</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          </Head>
+              {/*Head*/}
+              <Head>
+                  <title>Eleftherios Kourkopoulos</title>
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+              </Head>
 
-          {/*NavBar*/}
-          <NavBar/>
+              {/*NavBar*/}
+              <NavBar/>
 
-          {/*Custom Cursor*/}
-          <Cursor/>
+              {/*Custom Cursor*/}
+              <Cursor/>
 
-          {children}
-      </body>
-    </html>
+              {children}
+
+              <Footer />
+          </body>
+        </html>
   );
 }
