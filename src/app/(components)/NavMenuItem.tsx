@@ -12,7 +12,7 @@ interface MenuItemProps {
   onClose: () => void
 }
 
-const MenuItem = ({ name, path, index, isMenuOpen, onClose }: MenuItemProps) => {
+const NavMenuItem = ({ name, path, index, isMenuOpen, onClose }: MenuItemProps) => {
   const router = useRouter()
   const [isHovered, setIsHovered] = useState(false);
   const { isMobile } = useDeviceDetection();
@@ -24,14 +24,14 @@ const MenuItem = ({ name, path, index, isMenuOpen, onClose }: MenuItemProps) => 
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={{
         opacity: isMenuOpen ? 1 : 0,
-        x: isMenuOpen ? 0 : -20,
+        y: isMenuOpen ? 0 : 50,
       }}
       transition={{
-        duration: 0.3,
-        delay: isMenuOpen ? index * 0.1 : 0,
+        duration: 0.75,
+        delay: isMenuOpen ? index * 0.2 : index * 0.15,
         ease: "easeInOut"
       }}
       className={`${ isMobile ? "w-[180px] h-[180px]" : "w-[250px] h-[250px]"} border flex px-4 py-2 items-end backdrop-blur-md border-[#555] cursor-pointer relative overflow-hidden`}
@@ -73,4 +73,4 @@ const MenuItem = ({ name, path, index, isMenuOpen, onClose }: MenuItemProps) => 
   )
 }
 
-export default MenuItem
+export default NavMenuItem

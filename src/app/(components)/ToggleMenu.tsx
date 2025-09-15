@@ -21,7 +21,7 @@ const ToggleButton = ({desc, isActive, onClick}: ToggleButtonProps) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
 
     return (
-        <button className='relative border w-[24px] h-[24px] p-1'
+        <button className='relative border w-[24px] h-[24px] p-1 bg-black/75'
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => onClick(desc.value)}
@@ -47,7 +47,8 @@ const ToggleMenu = ({
                     }: ToggleMenuProps) => {
 
     return (<>
-    <div className='flex flex-col gap-6 p-3 border rounded-lg'>
+    <div className='flex flex-col gap-6 px-3 py-5 border rounded-xl
+    backdrop-blur-md bg-linear-to-t from-black/5 to-white/10'>
             {
                 buttons.map((buttonItem, index) =>
                         <ToggleButton key={index}

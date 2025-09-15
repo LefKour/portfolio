@@ -289,6 +289,25 @@ const PressureText = ({
                                 </span>
                             );
                         })}
+                        {wordIndex < words.length - 1 && (
+                            <span
+                                key={`space-${wordIndex}`}
+                                ref={(el: any) => {
+                                    const spaceIndex = words.slice(0, wordIndex + 1).join(' ').length;
+                                    spansRef.current[spaceIndex] = el;
+                                }}
+                                data-char=" "
+                                className="inline-block bold p-0 m-0"
+                                style={{ 
+                                    fontSize: `${responsiveSize}rem`,
+                                    lineHeight: 1,
+                                    padding: 0,
+                                    margin: 0
+                                }}
+                            >
+                                &nbsp;
+                            </span>
+                        )}
                     </span>
                 ))}
             </h1>

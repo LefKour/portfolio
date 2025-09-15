@@ -16,8 +16,13 @@ const Cursor = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [elementDimensions, setElementDimensions] = useState({ width: 12, height: 12 });
+  const [isMounted, setIsMounted] = useState(false);
   // const [ripples, setRipples] = useState<Ripple[]>([]);
   const { isMobile} = useDeviceDetection();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
@@ -25,12 +30,18 @@ const Cursor = () => {
       
       const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
       if (elementBelow) {
-        const isInteractive = elementBelow.matches('button, a, [role="button"], .cursor-pointer, input, textarea, select') ||
+        // First check for custom cursor target attribute
+        const customTarget = elementBelow.closest('[data-cursor-target]');
+        
+        // Fallback to default interactive elements
+        const isInteractive = customTarget || 
+                             elementBelow.matches('button, a, [role="button"], .cursor-pointer, input, textarea, select') ||
                              elementBelow.closest('button, a, [role="button"], .cursor-pointer, input, textarea, select');
         
-        const targetElement = isInteractive ? (elementBelow.matches('button, a, [role="button"], .cursor-pointer, input, textarea, select') ?
-            elementBelow : elementBelow.closest('button, a, [role="button"], ' +
-                '.cursor-pointer, input, textarea, select')) : null;
+        const targetElement = customTarget || 
+                             (isInteractive ? (elementBelow.matches('button, a, [role="button"], .cursor-pointer, input, textarea, select') ?
+                                elementBelow : elementBelow.closest('button, a, [role="button"], ' +
+                                    '.cursor-pointer, input, textarea, select')) : null);
         
         if (targetElement && !isHovering) {
           setIsHovering(true);
@@ -85,6 +96,10 @@ const Cursor = () => {
       // document.removeEventListener('click', handleClick);
     };
   }, [isHovering]);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return ( isMobile ?
           <></> :

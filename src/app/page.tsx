@@ -6,26 +6,24 @@ import AboutSection from "@/app/(containers)/AboutSection";
 import ContactSection from "@/app/(containers)/ContactSection";
 import GetInTouchWidget from "@/app/(components)/GetInTouchWidget";
 import PhilosophySection from "@/app/(containers)/PhilosophySection";
-
+import LoadingScreen from "@/app/(components)/LoadingScreen";
+import { useLoadingContext } from "@/lib/hooks/useLoadingContext";
+import Cursor from "@/app/(components)/Cursor";
 
 export default function Home() {
+    const { isLoading, completeLoading } = useLoadingContext();
 
-      return (<>
-          {/* Hero Section */}
-          <HeroSection />
+    return (<>
+        {/* Main Page Content */}
+        <HeroSection />
+        {/*<PhilosophySection />*/}
+        {/*<AboutSection />*/}
+        {/*<WorkSection />*/}
+        {/*<ContactSection />*/}
+        {/*<GetInTouchWidget />*/}
+        {/*<Cursor />*/}
 
-          {/* Philosophy */}
-          <PhilosophySection />
-
-          {/* About */}
-          <AboutSection />
-
-          {/* Work */}
-          <WorkSection />
-
-          {/* Contact */}
-          <ContactSection />
-
-          <GetInTouchWidget />
-      </>);
+        {/*/!* Loading Screen Overlay *!/*/}
+        {/*{isLoading && <LoadingScreen onComplete={completeLoading} />}*/}
+    </>);
 }

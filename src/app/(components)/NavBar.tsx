@@ -3,12 +3,14 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from "react";
 import { useDeviceDetection } from "@/lib/hooks";
-import MenuItem from "@/app/(components)/MenuItem";
+import { useLoadingContext } from '@/lib/hooks/useLoadingContext';
+import NavMenuItem from "@/app/(components)/NavMenuItem";
 import PressureText from "@/app/(components)/PressureText";
 
 const NavBar = () => {
     const router = useRouter();
-    const { isMobile, isClient } = useDeviceDetection();
+    const { isMobile, isClient, screenWidth, screenHeight } = useDeviceDetection();
+    const { isLoading } = useLoadingContext();
 
     // Cross Icon
     const [isCrossHovered, setIsCrossHovered] = useState(false);
@@ -21,7 +23,6 @@ const NavBar = () => {
     const [location, setLocation] = useState<string>('');
     const [currentTime, setCurrentTime] = useState<string>('');
 
-    // Disable scroll when mobile menu is open
     useEffect(() => {
         if (isMobile && isMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -40,7 +41,6 @@ const NavBar = () => {
         };
     }, [isMobile, isMenuOpen]);
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (isMenuOpen) {
@@ -58,10 +58,12 @@ const NavBar = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [isMenuOpen]);
 
-    const latitude = 51.5074;
-    const longitude = -0.1278;
 
     useEffect(() => {
+        // TODO: Move to a config class
+        const latitude = 51.5074;
+        const longitude = -0.1278;
+
         const getLocationFromCoords = async () => {
             try {
                 const response = await fetch(
@@ -80,7 +82,7 @@ const NavBar = () => {
         };
 
         getLocationFromCoords().then(r => {});
-    }, [latitude, longitude]);
+    }, []);
 
     useEffect(() => {
         const updateTime = () => {
@@ -88,7 +90,7 @@ const NavBar = () => {
             const timeString = now.toLocaleTimeString('en-US', { 
                 hour: 'numeric', 
                 minute: '2-digit',
-                hour12: true 
+                hour12: false
             }).toLowerCase();
             setCurrentTime(timeString);
         };
@@ -100,19 +102,28 @@ const NavBar = () => {
     }, []);
 
     return (
-        <div className={`fixed z-100 w-full flex ${isMobile ? "": "p-4"} flex-col gap-4 select-none`}>
+        <motion.div
+            className={`fixed z-100 w-full flex gap-4 flex-col select-none`}
+            initial={{ y: "-100%" }}
+            animate={{ y: isLoading ? "-100%" : 0 }}
+            exit={{ y: "-100%" }}
+            transition={{
+                duration: 0.8,
+                ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+        >
 
             {/*Core Navbar*/}
             { !(isMobile && isMenuOpen) && <div
-                className={`flex items-center justify-between max-w-[800px] relative
-                 backdrop-blur-md bg-linear-to-t from-black/5 to-white/5 p-4 
-                 ${isMobile ? "pt-16 border-b": "border"} border-[#555] gap-8 select-none`}>
+                className={`flex items-center justify-between relative w-full
+                 backdrop-blur-md bg-linear-to-t from-black/5 to-white/5 p-4 overflow-clip
+                 // ${screenWidth > 1220 ? 'max-w-[50%]' : ''} 
+                 ${isMobile ? "pt-16 border-b" : "border w-full"} border-[#555] gap-8 select-none`}>
 
                 {/*Header*/}
                 <div className='flex items-center justify-center cursor-pointer gap-2 select-none'>
-
                     {/*Cross Icon*/}
-                    { !isMobile && <motion.div
+                    {!isMobile && <motion.div
                         className='h-full w-[24px] mr-2 flex items-center justify-center relative p-4 cursor-pointer'
                         onHoverStart={() => setIsCrossHovered(true)}
                         onHoverEnd={() => setIsCrossHovered(false)}
@@ -138,11 +149,11 @@ const NavBar = () => {
                             }}
                             transition={{duration: 0.2, ease: "easeInOut"}}
                         />
-                    </motion.div> }
+                    </motion.div>}
 
                     {/*Name*/}
-                    { isMobile ?
-                        <h2 onClick={() => router?.push('/')}>ELEFTHERIOS KOURKOPOULOS</h2>:
+                    {isMobile ?
+                        <h2 onClick={() => router?.push('/')}>ELEFTHERIOS KOURKOPOULOS</h2> :
                         <PressureText
                             text='Eleftherios Kourkopoulos'
                             flex={false}
@@ -170,8 +181,8 @@ const NavBar = () => {
                     animate={{
                         backgroundColor:
                             isMobile ?
-                            isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(255,255,255, 0.2)':
-                            isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(10,10,10,1)',
+                                isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(255,255,255, 0.2)' :
+                                isMenuOpen ? 'rgba(255,255,255, 1)' : isMenuHovered ? 'rgba(30,30,30, 1)' : 'rgba(10,10,10,1)',
                     }}
                     transition={{duration: 0.2, ease: "easeInOut"}}
                 >
@@ -184,7 +195,7 @@ const NavBar = () => {
                         transition={{duration: 0.2}}
                     >
                         {isMenuOpen ? 'close' : 'menu'}
-                    </motion.span> }
+                    </motion.span>}
 
                     {/* Menu Icon */}
                     <motion.div
@@ -218,12 +229,12 @@ const NavBar = () => {
                         />
                     </motion.div>
                 </motion.button>
-            </div> }
+            </div>}
 
             {/* Indicator */}
             {isCrossHovered && !isMobile && (
                 <motion.div
-                    className='flex items-center gap-4 px-4 py-2 border bg-black w-fit'
+                    className='flex items-center gap-4 px-4 py-2 mx-4 border bg-black w-fit'
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
@@ -285,7 +296,7 @@ const NavBar = () => {
                 data-menu-container
                 className={`${isMobile ? 
                     "fixed inset-0 w-screen h-screen bg-linear-to-t from-black/20 to-white/10 backdrop-blur z-50" :
-                    "flex flex-col gap-3 w-fit"
+                    "flex flex-col gap-3 w-fit mx-4"
                 }`}
                 initial={{ opacity: 0, y: 0, height: 0 }}
                 animate={{ 
@@ -329,7 +340,8 @@ const NavBar = () => {
                         <motion.div
                             className='relative w-5 h-5 flex items-center justify-center'
                             animate={{rotate: isMenuOpen ? 180 : 0}}
-                            transition={{duration: 0.3, ease: "easeInOut"}}
+                            transition={{duration: 0.3,
+                                ease: "easeInOut"}}
                         >
                             <motion.div
                                 className={`absolute w-full h-0.5 ${isMenuOpen ? 'bg-black' : 'bg-white'}`}
@@ -363,14 +375,15 @@ const NavBar = () => {
                                 {`${isMobile ?
                                     "w-screen h-screen flex flex-col items-center justify-center gap-2" :
                                     "grid grid-cols-2 gap-4"
-                                }`}>
+                                }`}
+                >
                     {[
                         {name: 'about.', path: '/about'},
                         {name: 'work.', path: '/work'},
                         {name: 'lab', path: '/lab'},
                         {name: 'contact', path: '/contact'}
                     ].map((item, index) => (
-                        <MenuItem
+                        <NavMenuItem
                             key={item.name}
                             name={item.name}
                             path={item.path}
@@ -381,7 +394,7 @@ const NavBar = () => {
                     ))}
                 </motion.div>
             </motion.div>
-        </div>
+        </motion.div>
     );
 }
 

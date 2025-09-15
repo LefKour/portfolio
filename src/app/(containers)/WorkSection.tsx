@@ -1,7 +1,9 @@
+import WorkCarousel from "@/app/(components)/WorkCarousel";
+
 const WorkSection = () => {
     return (
-        <section className='flex w-screen h-screen justify-center items-center'>
-            <h1 className='text-[6rem]'>Work</h1>
+        <section className='relative flex w-screen h-screen justify-center items-center p-6'>
+            <WorkCarousel />
         </section>
     );
 }

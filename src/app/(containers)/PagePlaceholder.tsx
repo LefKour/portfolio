@@ -1,6 +1,7 @@
 'use client'
 import PressureText from "@/app/(components)/PressureText";
 import { motion } from 'framer-motion';
+import AnimatedGrid from "@/app/(components)/AnimatedGrid";
 
 interface PagePlaceholderProps {
     pageTitle: string;
@@ -10,7 +11,10 @@ interface PagePlaceholderProps {
 const PagePlaceholder = ({pageTitle, titleSize}: PagePlaceholderProps) => {
     return (<>
         <section className='w-screen h-screen flex flex-col items-center justify-center'>
+            <AnimatedGrid />
+
             <div className='h-full flex items-end justify-end'>
+
                 <PressureText
                     text={pageTitle}
                     flex={false}
@@ -22,8 +26,8 @@ const PagePlaceholder = ({pageTitle, titleSize}: PagePlaceholderProps) => {
                     textSizeRem={titleSize}
                 />
             </div>
-            <div className='w-[95%] border border-[#666]'/>
-            <div className='w-full h-full flex justify-center items-center'>
+            <div className='w-[95%] border border-[#666] z-1'/>
+            <div className='w-full h-full flex justify-center items-center z-1 bg-black'>
                 <div
                     className='absolute bottom-0 w-full h-[40%] bg-radial-[at_50%_100%] from-white from-0% to-black/5 opacity-20 to-75%'/>
 

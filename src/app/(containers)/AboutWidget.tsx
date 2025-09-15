@@ -75,20 +75,27 @@ const AboutWidget = () => {
                             </div>
 
                             {/* Tags */}
-                            <div className='flex flex-col gap-6'>
-                                <div className='w-fit flex justify-center items-center px-4 py-2 border border-white
+                            <div
+                                className='flex flex-col gap-6'>
+                                <div
+                                    data-cursor-target
+                                    className='w-fit flex justify-center items-center px-4 py-2 border border-white
                                 backdrop-blur-md bg-linear-to-t from-white/5 to-white/10 transition
                                 hover:from-white/10 hover:to-white/20
                                 '>
                                     <p><strong>Design Systems Analyst</strong> @ Applied R+D | Foster + Partners</p>
                                 </div>
-                                <div className='w-fit flex justify-center items-center px-4 py-2 border border-white
+                                <div
+                                    data-cursor-target
+                                    className='w-fit flex justify-center items-center px-4 py-2 border border-white
                                 backdrop-blur-md bg-linear-to-t from-white/5 to-white/10 transition
                                 hover:from-white/10 hover:to-white/20
                                 '>
                                     <p><strong>Software Development Engineer</strong> @ McNeel Europe</p>
                                 </div>
-                                <div className='w-fit flex justify-center items-center px-4 py-2 border border-white
+                                <div
+                                    data-cursor-target
+                                    className='w-fit flex justify-center items-center px-4 py-2 border border-white
                                 backdrop-blur-md bg-linear-to-t from-white/5 to-white/10 transition
                                 hover:from-white/10 hover:to-white/20
                                 '>
