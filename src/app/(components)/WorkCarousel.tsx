@@ -18,41 +18,38 @@ const WorkCarousel = () => {
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        // Scene setup
         const scene = new THREE.Scene();
 
-        // Camera setup
+        const rect = canvasRef.current.getBoundingClientRect();
         const camera = new THREE.PerspectiveCamera(
             75,
-            window.innerWidth / window.innerHeight,
+            rect.width / rect.height,
             0.1,
             1000
         );
-        camera.position.set(0, 0, 2.5);
-        // camera.position.z = 5;
+        camera.position.set(0.5, 0, 2.0);
 
-        // Renderer setup
         const renderer = new THREE.WebGLRenderer({
             canvas: canvasRef.current,
             antialias: true,
             alpha: true
         });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(rect.width, rect.height);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setClearColor(0x000000, 0);
         rendererRef.current = renderer;
 
         const frameGroup = new THREE.Group();
 
-        // Create multiple cubes arranged in a circle
         const numFrames = 10;
-        const radius = 1;
+        const radius = 0.6;
         const frames: THREE.Mesh[] = [];
 
         for (let i = 0; i < numFrames; i++) {
             const geometry = new THREE.PlaneGeometry(1, 1);
             const material = new THREE.MeshPhongMaterial({
                 color: new THREE.Color(150, 150, 150),
+                transparent: true,
                 side: THREE.DoubleSide
             });
             const frame = new THREE.Mesh(geometry, material);
@@ -63,18 +60,15 @@ const WorkCarousel = () => {
 
             frame.rotation.y = - i * 360 / numFrames * Math.PI / 180;
 
-            // scene.add(frame);
             frameGroup.add(frame);
             frames.push(frame);
         }
 
-        // Tilt the entire group 10 degrees diagonally
-        const initialTilt = 45 * Math.PI / 180;
-        // frameGroup.rotation.set(initialTilt, initialTilt, 0);
+        const initialTilt = -5 * Math.PI / 180;
+        frameGroup.rotation.z = initialTilt;
 
         scene.add(frameGroup);
 
-        // Add lighting
         const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
         scene.add(ambientLight);
 
@@ -82,7 +76,6 @@ const WorkCarousel = () => {
         directionalLight.position.set(1, 1, 1);
         scene.add(directionalLight);
 
-        // Mouse event handlers
         const handleMouseDown = (event: MouseEvent) => {
             mouseRef.current.isDragging = true;
             mouseRef.current.previousX = event.clientX;
@@ -104,41 +97,45 @@ const WorkCarousel = () => {
             mouseRef.current.isDragging = false;
         };
 
-        // Add mouse event listeners
         canvasRef.current.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseup', handleMouseUp);
 
-        // Animation loop
         const animate = () => {
             animationFrameIdRef.current = requestAnimationFrame(animate);
 
             const lerpFactor = 0.005;
             mouseRef.current.currentRotation += (mouseRef.current.targetRotation - mouseRef.current.currentRotation) * lerpFactor;
-            frameGroup.rotation.y = initialTilt + mouseRef.current.currentRotation;
+
+            // Create the tilted axis: Y-axis rotated by the tilt amount around Z
+            const tiltedAxis = new THREE.Vector3(0, 1, 0);
+            tiltedAxis.applyAxisAngle(new THREE.Vector3(0, 0, 1), initialTilt);
+
+            // Set rotation around the tilted axis
+            frameGroup.rotation.set(0, 0, 0);
+            frameGroup.rotateOnAxis(tiltedAxis, mouseRef.current.currentRotation);
 
             renderer.render(scene, camera);
         };
 
         animate();
 
-        // Handle window resize
         const handleResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+            if(!canvasRef || !canvasRef.current) return;
+            const rect = canvasRef.current.getBoundingClientRect();
+            camera.aspect = rect.width / rect.height;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(rect.width, rect.height);
         };
 
         window.addEventListener('resize', handleResize);
 
-        // Cleanup function
         return () => {
             if (animationFrameIdRef.current) {
                 cancelAnimationFrame(animationFrameIdRef.current);
             }
             window.removeEventListener('resize', handleResize);
 
-            // Remove mouse event listeners
             if (canvasRef.current) {
                 canvasRef.current.removeEventListener('mousedown', handleMouseDown);
             }
@@ -156,7 +153,7 @@ const WorkCarousel = () => {
     }, []);
 
     return (<>
-        <canvas ref={canvasRef} className='w-full h-full bg-transparent'/>
+        <canvas ref={canvasRef} className='h-full w-full z-20'/>
     </>);
 };
 

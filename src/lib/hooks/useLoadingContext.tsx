@@ -15,9 +15,9 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const hasLoaded = sessionStorage.getItem('portfolio-loaded');
     
-    // if (hasLoaded) {
-    //   setIsLoading(false);
-    // }
+    if (hasLoaded) {
+      setIsLoading(false);
+    }
   }, []);
 
   const completeLoading = () => {
@@ -35,7 +35,7 @@ export function LoadingProvider({ children }: { children: ReactNode }) {
 export function useLoadingContext() {
   const context = useContext(UseLoadingContext);
   if (context === undefined) {
-    throw new Error('useLoadingContext must be used within a LoadingProvider');
+    throw new Error('  must be used within a LoadingProvider');
   }
   return context;
 }

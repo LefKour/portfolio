@@ -231,7 +231,13 @@ const PressureText = ({
     return (
         <div
             ref={containerRef}
-            className="relative w-full overflow-hidden bg-transparent p-0 m-0"
+            className="relative w-fit overflow-hidden bg-transparent"
+            style={{
+                padding: 0,
+                margin: 0,
+                width: 'fit-content',
+                height: 'fit-content'
+            }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             onClick={() => onClick ? onClick() : undefined }
@@ -256,16 +262,20 @@ const PressureText = ({
 
             <h1
                 ref={titleRef}
-                className={`text-pressure-title p-0 ${stroke ? 'stroke' : ''} uppercase ${className}`}
+                className={`text-pressure-title ${stroke ? 'stroke' : ''} uppercase ${className}`}
                 style={{
                     fontFamily,
                     fontSize: fontSize,
-                    lineHeight,
+                    lineHeight: 1,
                     transform: `scale(1, ${scaleY})`,
                     transformOrigin: 'center top',
                     margin: 0,
+                    padding: 0,
                     fontWeight: 100,
                     color: stroke ? undefined : textColor,
+                    display: 'block',
+                    width: 'fit-content',
+                    height: 'fit-content',
                 }}
             >
                 {words.map((word, wordIndex) => (
@@ -277,12 +287,14 @@ const PressureText = ({
                                     key={`${wordIndex}-${charIndex}`}
                                     ref={(el: any) => (spansRef.current[globalIndex] = el)}
                                     data-char={char}
-                                    className="inline-block bold p-0 m-0"
-                                    style={{ 
+                                    className="inline-block bold"
+                                    style={{
                                         fontSize: `${responsiveSize}rem`,
                                         lineHeight: 1,
                                         padding: 0,
-                                        margin: 0
+                                        margin: 0,
+                                        verticalAlign: 'top',
+                                        display: 'inline-block'
                                     }}
                                 >
                                     {char}
@@ -297,12 +309,14 @@ const PressureText = ({
                                     spansRef.current[spaceIndex] = el;
                                 }}
                                 data-char=" "
-                                className="inline-block bold p-0 m-0"
-                                style={{ 
+                                className="inline-block bold"
+                                style={{
                                     fontSize: `${responsiveSize}rem`,
                                     lineHeight: 1,
                                     padding: 0,
-                                    margin: 0
+                                    margin: 0,
+                                    verticalAlign: 'top',
+                                    display: 'inline-block'
                                 }}
                             >
                                 &nbsp;

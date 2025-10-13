@@ -5,7 +5,6 @@ import Head from "next/head";
 import { LoadingProvider } from "@/lib/hooks/useLoadingContext";
 import LayoutContent from "@/app/(components)/LayoutContent";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,7 +38,6 @@ export default function RootLayout({
             className={`${spaceGrotesk.variable}  antialiased`}
             suppressHydrationWarning={true}
           >
-
               {/*Head*/}
               <Head>
                   <title>Eleftherios Kourkopoulos</title>

@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import Stats from "stats.js";
 
 const vertexShader = `
 varying vec2 vUv;
@@ -277,10 +278,11 @@ const ChromaticAberrationShader = {
     `
 };
 
-export default class GridExperience implements GridExperience {
+export default class GridExperience {
     // Members
+    renderer: THREE.WebGLRenderer | null = null;
+
     private readonly scene: THREE.Scene | null = null;
-    private renderer: THREE.WebGLRenderer | null = null;
     private readonly camera: THREE.Camera | null = null;
     private readonly  controls: OrbitControls | null = null;
 
@@ -349,7 +351,22 @@ export default class GridExperience implements GridExperience {
     }
 
     render() {
+        const stats = new Stats();
+        stats.showPanel(0);
+        document.body.appendChild(stats.dom);
+
+        // Add custom panels for GPU metrics
+        const drawCallsPanel = new Stats.Panel('Draws', '#ff8', '#221');
+        const geometriesPanel = new Stats.Panel('Geoms', '#f8f', '#212');
+        const texturesPanel = new Stats.Panel('Texs', '#8ff', '#122');
+
+        stats.addPanel(drawCallsPanel);
+        stats.addPanel(geometriesPanel);
+        stats.addPanel(texturesPanel);
+
         const animate = (time: number) => {
+            stats.begin();
+
             this.frameHandle = requestAnimationFrame(animate);
 
             // Focus translation
@@ -394,6 +411,16 @@ export default class GridExperience implements GridExperience {
             } else {
                 this.renderer?.render(this.scene!, this.camera!);
             }
+
+            // Update custom panels with GPU metrics
+            if (this.renderer) {
+                const info = this.renderer.info;
+                drawCallsPanel.update(info.render.calls, 200);
+                geometriesPanel.update(info.memory.geometries, 100);
+                texturesPanel.update(info.memory.textures, 100);
+            }
+
+            stats.end();
         };
 
         animate(0);
@@ -727,7 +754,6 @@ export default class GridExperience implements GridExperience {
         window.removeEventListener('wheel', this.handleMouseWheel);
         window.removeEventListener('resize', this.handleResize);
     }
-
     //#region Events Handlers
 
     private handleOnMouseMove = (event: MouseEvent) => {
