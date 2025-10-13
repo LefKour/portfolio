@@ -95,7 +95,7 @@ const DraggableWindow = ({
         } else {
             setSavedState({ position, size });
             setPosition({ x: 0, y: 0 });
-            setSize({ width: window.innerWidth, height: window.innerHeight });
+            // setSize({ width: window.innerWidth, height: window.innerHeight });
             setIsMaximized(true);
         }
     };
