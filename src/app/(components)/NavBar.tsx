@@ -33,7 +33,7 @@ const NavBar = () => {
 
     return (
         <motion.div
-            className={`sticky top-0 flex flex-col gap-10 p-4 pt-10 pb-10 justify-center select-none z-50`}
+            className={`fixed top-0 flex flex-col gap-10 p-4 pt-10 pb-10 justify-center select-none z-50`}
         >
 
             {/* Header */}

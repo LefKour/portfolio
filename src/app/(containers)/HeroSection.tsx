@@ -12,6 +12,7 @@ const HeroSection = () => {
     const router = useRouter();
 
     return (
+        // Banner
         <div className="flex flex-col gap-4 items-start">
             <section data-tag={"hero-section"}
                      className='relative flex flex-col items-center p-0 mt-35 text-wrap '>
@@ -26,7 +27,8 @@ const HeroSection = () => {
                 </p>
             </section>
 
-            <button className={"inline-flex border px-4 py-2 rounded-sm text-lg hover:bg-white/20 transition cursor-pointer"}
+            <button className={"inline-flex border border-neutral-500 px-4 py-2 " +
+                "rounded-sm text-lg hover:bg-white/20 transition cursor-pointer"}
                     onClick={() => {router.push("/about")}}>learn more</button>
         </div>
 

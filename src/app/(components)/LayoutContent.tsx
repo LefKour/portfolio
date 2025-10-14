@@ -11,7 +11,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
   const { isLoading } = useLoadingContext();
 
   return (
-    <main className={"relative max-w-[1000px] mx-auto min-h-screen"}>
+    <main className={"relative w-full max-w-[1200px] mx-auto min-h-screen"}>
         <div className={"relative flex w-full gap-2"}>
             <div className={"w-1/3"}>
                 <NavBar/>
