@@ -4,7 +4,7 @@ import {useRouter} from "next/navigation";
 const WorkSection = () => {
     const router = useRouter();
 
-    return <div className={"relative w-full flex"}>
+    return <div className={"relative w-full flex flex-col md:flex-row gap-4"}>
 
         {/* Text */}
         <div className={"w-full flex flex-col gap-2"}>
@@ -26,7 +26,7 @@ const WorkSection = () => {
         </div>
 
         {/* Grid */}
-        <div className={"w-full flex flex-wrap gap-2"}>
+        <div className={"w-full flex flex-wrap gap-2 items-center justify-center"}>
             <div className={"w-[175px] h-[175px] rounded-lg flex flex-col gap-2"}>
                 <div className={"w-full h-full bg-gradient-to-br from-neutral-100 via-neutral-300 to-white rounded-lg animate-pulse-gradient bg-[length:200%_200%]"}/>
                 <div className={"w-full h-full bg-gradient-to-br from-white via-neutral-200 to-neutral-100 rounded-lg animate-pulse-gradient bg-[length:200%_200%]"} style={{animationDelay: '1s'}}/>

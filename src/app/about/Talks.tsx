@@ -1,3 +1,5 @@
+import { useDeviceDetection } from "@/lib/hooks";
+
 type Talk = {
     title: string;
     venue: string;
@@ -21,11 +23,13 @@ const TALKS : Talk[] = [
 ]
 
 const Talk = ({talk} : {talk : Talk}) => {
+    const { isMobile } = useDeviceDetection();
+
     return (
         <div className={"flex justify-between items-center"}>
-            <h5 className={"text-md"}>{talk.title}, {talk.date}</h5>
-            <button className={"inline border border-neutral-300 p-2 rounded cursor-pointer hover:font-bold hover:bg-white/20"}
-                    onClick={() => {window.open(talk.url)}}>visit</button>
+            <h5 className={"text-lg font-medium"}>{talk.title}, {talk.date}</h5>
+            { !isMobile && <button className={"inline border border-neutral-300 p-2 rounded cursor-pointer hover:font-bold hover:bg-white/20"}
+                    onClick={() => {window.open(talk.url)}}>visit</button> }
         </div>
     );
 };

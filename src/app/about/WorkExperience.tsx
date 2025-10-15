@@ -101,7 +101,7 @@ const PROFESSIONAL_ROLES : Role[] = [
 const ProfessionalExperienceBlock = ({ role }: {role: Role}) => {
     return (
         <div className={"relative flex flex-col gap-2"}>
-            <h5 className={"font-medium text-neutral-200"}>{role.company} · <span className={"font-light"}>{role.location}</span></h5>
+            <h5 className={"font-medium text-neutral-400"}>{role.company} · <span className={"font-light"}>{role.location}</span></h5>
             <h4 className={"text-2xl font-bold"}>{role.title}</h4>
             <h5 className={"text-neutral-300"}>{role.duration}</h5>
 
@@ -109,7 +109,7 @@ const ProfessionalExperienceBlock = ({ role }: {role: Role}) => {
             <p className={""}>{role.description}</p>
 
             {/*Tags*/}
-            {role.tags.length > 0 && <div className={"flex flex-wrap gap-2 mt-8"}>
+            {role.tags.length > 0 && <div className={"flex flex-wrap gap-2 mt-4 md:mt-8"}>
                 {role.tags.map((tag, i) => (
                     <div key={i} className={"relative p-2 border border-neutral-500 text-neutral-300 rounded-sm hover:bg-white/20 transition cursor-pointer"}>
                         {tag}
@@ -128,7 +128,7 @@ const WorkExperience = () => {
             </div>
 
             {/* Practice */}
-            <div className={"flex flex-col mt-8 gap-10"}>
+            <div className={"flex flex-col mt-8 gap-20 md:gap-10"}>
                 {PROFESSIONAL_ROLES.filter(r => r.type === "practice").map((r, i) => (
                     <ProfessionalExperienceBlock key={i} role={r} />
                 ))}

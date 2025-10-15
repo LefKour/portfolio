@@ -72,7 +72,9 @@ const ExpertiseSection = () => {
                 const scaledWidth = 200 * scale;
                 const scaledHeight = 200 * scale;
 
-                const x = canvas.width - scaledWidth;
+                // Center horizontally on mobile (width < 768px), right-aligned on desktop
+                const isMobile = window.innerWidth < 768;
+                const x = isMobile ? (canvas.width - scaledWidth) / 2 : canvas.width - scaledWidth;
                 const y = canvas.height - scaledHeight;
 
                 ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
@@ -94,7 +96,7 @@ const ExpertiseSection = () => {
             <h3 className="text-2xl font-light">Expertise</h3>
 
             {/* Expertise Window */}
-            <div className={"border border-neutral-500 rounded-lg h-[450px] p-4 mt-4 flex flex-col gap-6"}>
+            <div className={"border border-neutral-500 rounded-lg p-4 mt-4 flex flex-col gap-6"}>
                 <ul className={"flex gap-4"}>
                     <li className={`text-[0.75rem] p-2 border border-neutral-500 rounded-sm hover:bg-white/20 cursor-pointer
                     ${activeExpertiseIndex == 0 && "bg-white/20"}`}
@@ -117,10 +119,11 @@ const ExpertiseSection = () => {
                     </li>
                 </ul>
 
-                <div className={"relative w-full h-full"}>
-                    <canvas ref={canvasRef} className={"absolute top-0 w-full h-full bg-transparent"}/>
+                <div className={"relative w-full min-h-[450px] md:min-h-[350px]"}>
+                    <canvas ref={canvasRef} className={
+                        "absolute top-0 left-0 w-full h-full"}/>
 
-                    <div className={"relative flex flex-col gap-2 w-1/2"}>
+                    <div className={"relative flex flex-col gap-2 w-full md:w-1/2 z-10"}>
                         <h3 className={"font-bold text-2xl"}>{EXPERTISE_DATA[activeExpertiseIndex].title}</h3>
                         <p className={""}>{EXPERTISE_DATA[activeExpertiseIndex].description}</p>
                     </div>

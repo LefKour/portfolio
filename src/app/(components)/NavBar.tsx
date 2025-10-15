@@ -3,33 +3,39 @@ import { motion } from 'framer-motion'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import {Github, Linkedin} from "lucide-react";
+import {Github, Linkedin, Menu, X} from "lucide-react";
+import {useDeviceDetection} from "@/lib/hooks";
 
 interface NavBarItemProps {
     name: string,
-    route: string
+    route: string,
+    onClick?: () => void
 }
 
 const NavBarItem = ({
                         name,
-                        route
+                        route,
+                        onClick
                     }: NavBarItemProps) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const hoveredColor = "#DE9C40";
 
     return (
-    <li className={'inline-flex gap-2 items-center px-2 py-1 bg-white/20 border rounded-lg ' +
+    <li className={'w-1/2 md:w-auto inline-flex gap-2 items-center justify-center px-4 py-1 md:px-2 md:py-1 bg-white/20 border rounded-lg ' +
         'hover:bg-white/50 transition ease-in-out duration-100'}
         onMouseEnter={() => {setIsHovered(true)}}
         onMouseLeave={() => {setIsHovered(false)}}
     >
-        <Link href={route} className={`${isHovered ? `font-bold` : "text-white"} transition`}>{name}</Link>
+        <Link href={route}
+              onClick={() => { if(onClick !== null && onClick !== undefined) onClick(); }}
+              className={`${isHovered ? `font-bold` : "text-white"} transition`}>{name}</Link>
     </li>);
 };
 
 const NavBar = () => {
     const router = useRouter();
     const path = usePathname();
+    const { isMobile} = useDeviceDetection();
+    const [ isMenuOpen, setIsMenuOpen ] = useState<boolean>(false);
 
     const handleContactClick = () => {
         if (path !== '/') {
@@ -41,7 +47,52 @@ const NavBar = () => {
         }
     };
 
-    // Check if we need to scroll after navigation
+    const handleOnMenuButtonClicked = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            const scrollY = window.scrollY;
+            document.body.dataset.scrollY = scrollY.toString();
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+        } else {
+            const scrollY = document.body.dataset.scrollY;
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            delete document.body.dataset.scrollY;
+            if (scrollY) {
+                window.scrollTo({
+                    top: parseInt(scrollY),
+                    behavior: 'instant'
+                });
+            }
+        }
+
+        return () => {
+            const scrollY = document.body.dataset.scrollY;
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            if (scrollY) {
+                delete document.body.dataset.scrollY;
+                window.scrollTo({
+                    top: parseInt(scrollY),
+                    behavior: 'instant'
+                });
+            }
+        };
+    }, [isMenuOpen]);
+
     useEffect(() => {
         if (path === '/' && sessionStorage.getItem('scrollToContact') === 'true') {
             sessionStorage.removeItem('scrollToContact');
@@ -55,18 +106,39 @@ const NavBar = () => {
 
     return (
         <motion.div
-            className={`fixed top-0 flex flex-col gap-10 p-4 pt-10 pb-10 justify-center select-none z-50`}
+            className={`fixed top-0 flex flex-col gap-10 p-4 justify-center select-none z-50
+                bg-gradient-to-t from-neutral-800/20 to-neutral-100/10 backdrop-blur-xl w-full md:w-auto pt-5 pb-5
+                md:bg-none md:from-transparent md:to-transparent md:backdrop-blur-none md:pb-10 md:pt-10
+                ${ isMenuOpen ? "h-full justify-start" : ""}
+            `}
         >
 
-            {/* Header */}
-            <div className={"flex flex-col max-w-82"}>
-                <h2 className={"font-medium text-2xl"}>Eleftherios Kourkopoulos</h2>
+            {/* Header | Desktop */}
+            { !isMobile && <div className={"flex flex-col max-w-82"}>
+                <h2 className={"font-medium text-2xl cursor-pointer"}
+                    onClick={() => {router.push("/")}
+                }>Eleftherios Kourkopoulos</h2>
                 <p className={"font-light"}>software developer | creative technologist</p>
-            </div>
+            </div> }
 
-            {/* Navigation */}
-            <ul className={"flex flex-col max-w-82 gap-2 items-start"}>
-                <NavBarItem name={"Home"} route={"/"} />
+            {/* Header | Mobile */}
+            { isMobile &&
+                <div className={"flex justify-between items-center"}>
+                    <div className={"flex flex-col max-w-82"}>
+                        <h2 className={"font-medium text-2xl"}>Eleftherios Kourkopoulos</h2>
+                        <p className={"font-light"}>software developer | creative technologist</p>
+                    </div>
+
+                    <button  className={"p-2 border border-neutral-300/20 rounded-xl bg-white/10"}
+                        onClick={handleOnMenuButtonClicked}>
+                        {isMenuOpen ? <X /> : <Menu />}
+                    </button>
+                </div>
+            }
+
+            {/* Navigation | Desktop */}
+            {!isMobile && <ul className={"flex flex-col max-w-82 gap-2 items-start"}>
+                <NavBarItem name={"Home"} route={"/"}/>
                 <NavBarItem name={"About"} route={"/about"} />
                 <NavBarItem name={"Work"} route={"/work"} />
                 <li className={'inline-flex gap-2 items-center px-2 py-1 bg-white/20 border rounded-lg ' +
@@ -75,10 +147,25 @@ const NavBar = () => {
                 >
                     <span className={"hover:font-bold transition"}>Contact</span>
                 </li>
-            </ul>
+            </ul>}
 
-            {/*Social Media Buttons*/}
-            <div className={"flex gap-2 items-center"}>
+            {/* Navigation | Mobile */}
+            {(isMobile && isMenuOpen) &&
+                <ul className={"flex flex-col gap-10 items-center justify-center flex-1"}>
+                    <NavBarItem name={"Home"} route={"/"} onClick={() => {setIsMenuOpen(false)}} />
+                    <NavBarItem name={"About"} route={"/about"} onClick={() => {setIsMenuOpen(false)}} />
+                    <NavBarItem name={"Work"} route={"/work"} onClick={() => {setIsMenuOpen(false)}} />
+                    <li className={'w-1/2 inline-flex gap-2 items-center justify-center px-4 py-2 bg-white/20 border rounded-lg ' +
+                        'hover:bg-white/50 transition ease-in-out duration-100 cursor-pointer'}
+                        onClick={ () => { setIsMenuOpen(false); handleContactClick();}}
+                    >
+                        <span className={"hover:font-bold transition"}>Contact</span>
+                    </li>
+                </ul>
+            }
+
+            {/*Social Media Buttons | Desktop */}
+            {!isMobile && <div className={"flex gap-2 items-center"}>
                 <button className={"border p-2 rounded-full cursor-pointer hover:bg-white/20 transition"}
                         onClick={() => window.open("https://github.com/LefKour")}
                 >
@@ -89,7 +176,21 @@ const NavBar = () => {
                 >
                     <Linkedin/>
                 </button>
-            </div>
+            </div>}
+
+            {/*Social Media Buttons | Mobile */}
+            {(isMobile && isMenuOpen) && <div className={"flex gap-2 items-center justify-end"}>
+                <button className={"border p-2 rounded-full cursor-pointer hover:bg-white/20 transition"}
+                        onClick={() => window.open("https://github.com/LefKour")}
+                >
+                    <Github/>
+                </button>
+                <button className={"border p-2 rounded-full cursor-pointer hover:bg-white/20 transition"}
+                        onClick={() => window.open("https://www.linkedin.com/in/eleftherios-kourkopoulos-b27b32b8/")}
+                >
+                    <Linkedin/>
+                </button>
+            </div>}
         </motion.div>
     );
 }

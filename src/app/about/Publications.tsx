@@ -1,3 +1,5 @@
+import {useDeviceDetection} from "@/lib/hooks";
+
 type Publication = {
     title: string;
     journal: string;
@@ -27,17 +29,20 @@ const PUBLICATIONS : Publication[] = [
 ]
 
 const Publication = ({publication} : {publication : Publication}) => {
+
+    const { isMobile } = useDeviceDetection();
+
       return (
-          <div className={"flex flex-col gap-0"}>
-              <h5 className={"font-light text-neutral-300 text-md mb-2"}>{publication.date}, {publication.journal}</h5>
-              <div className={"flex justify-between items-center gap-2"}>
+          <div className={"flex flex-col"}>
+              <h5 className={"font-light text-neutral-400 text-md mb-2"}>{publication.date} · {publication.journal}</h5>
+              <div className={"flex justify-between items-center gap-4"}>
                   <h3 className={"font-medium text-lg"}>{publication.title}</h3>
-                  <button
+                  { !isMobile && <button
                       className={"inline border border-neutral-300 p-2 rounded cursor-pointer hover:font-bold hover:bg-white/20"}
                       onClick={() => {
                           window.open(publication.url)
                       }}>visit
-                  </button>
+                  </button> }
               </div>
               <div className={"text-wrap"}>
                   <h5 className={"font-light text-neutral-300 text-md mb-2 italic"}>{publication.authors.join(", ")}</h5>

@@ -11,8 +11,8 @@ const Footer = () => {
 
     return (
         <section className='absolute bottom-0 w-full flex p-4 justify-between'>
-            <p className={"margin-auto"}>Crafted by Eleftherios Kourkopoulos, {currentYear}</p>
-            <p className={"margin-auto"}>Copyright @ Eleftherios Kourkopoulos, All Rights Reserved</p>
+            <p className={"margin-auto text-start text-sm"}>Crafted by Eleftherios Kourkopoulos, {currentYear}</p>
+            <p className={"margin-auto text-end text-sm"}>Copyright @ Eleftherios Kourkopoulos, All Rights Reserved</p>
         </section>
     );
 };

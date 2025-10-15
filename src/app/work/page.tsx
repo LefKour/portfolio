@@ -43,8 +43,8 @@ const PROJECTS: Project[] = [
 
 const Project = ({project} : {project : Project}) => {
     return (
-        <div className={"flex gap-4 w-full h-50"}>
-            <div className={"flex flex-col gap-2 w-1/2"}>
+        <div className={"flex flex-col md:flex-row gap-4 w-full md:h-50 rounded-xl overflow-clip"}>
+            <div className={"flex flex-col gap-2 w-full md:w-1/2"}>
                 <h3 className={"font-medium text-neutral-200 text-3xl"}>{project.title}</h3>
                 <h5 className={"font-light text-neutral-300 text-xl"}>{project.type}, {project.year}</h5>
                 {project.tags.length > 0 &&  <div className={"flex flex-wrap gap-1"}>
@@ -54,7 +54,7 @@ const Project = ({project} : {project : Project}) => {
                     ))}
                 </div>}
             </div>
-            <div className={"relative rounded w-2/3 bg-linear-to-t from-neutral-800 to-neutral-200"} />
+            <div className={"relative rounded w-full h-[100vw] md:w-2/3 bg-linear-to-t from-neutral-800 to-neutral-200"} />
         </div>
     );
 };

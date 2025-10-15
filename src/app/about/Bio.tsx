@@ -3,8 +3,8 @@ import ProfilePic from "@/assets/profile_pic.jpg";
 
 const Bio = () => {
     return (
-        <div className="flex gap-4">
-            <Image className={"rounded w-[250px] h-[250px]"} src={ProfilePic} width={250} height={250} alt={"profile picture"}/>
+        <div className="flex flex-col  md:flex-row gap-4">
+            <Image className={"rounded w-full md:w-[250px] md:h-[250px]"} src={ProfilePic} width={250} height={250} alt={"profile picture"}/>
 
             <div className="flex flex-col gap-2">
                 <p className={"font-medium"}>

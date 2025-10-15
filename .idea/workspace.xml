@@ -5,27 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e06cead2-9e27-47ea-9bac-61bd971e49a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/(components)/HighlighSpan.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(containers)/WorkSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/about/Bio.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/about/Education.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/about/Publications.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/about/Talks.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/about/WorkExperience.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(components)/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/Footer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(components)/LayoutContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/LayoutContent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(containers)/ContactSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/ContactSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(containers)/EngagementSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/EngagementSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(containers)/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/ExpertiseSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(containers)/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/HeroSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(containers)/WorkSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/WorkSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/about/Bio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/Bio.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/about/Publications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/Publications.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/about/Talks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/Talks.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/about/WorkExperience.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/WorkExperience.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/work/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/work/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/github-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/linkedin-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +159,8 @@
       <workItem from="1760391219201" duration="2066000" />
       <workItem from="1760425268950" duration="19180000" />
       <workItem from="1760480240434" duration="123000" />
-      <workItem from="1760514208458" duration="16474000" />
+      <workItem from="1760514208458" duration="17170000" />
+      <workItem from="1760546498304" duration="9880000" />
     </task>
     <servers />
   </component>
