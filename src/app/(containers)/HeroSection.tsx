@@ -1,12 +1,5 @@
 import {useRouter} from "next/navigation";
-
-const HighlightSpan = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <span className={"font-bold text-white cursor-pointer hover:text-blue-500 transition"}>
-            {children}
-        </span>
-    );
-};
+import HighlightSpan from "@/app/(components)/HighlighSpan";
 
 const HeroSection = () => {
     const router = useRouter();
@@ -31,7 +24,6 @@ const HeroSection = () => {
                 "rounded-sm text-lg hover:bg-white/20 transition cursor-pointer"}
                     onClick={() => {router.push("/about")}}>learn more</button>
         </div>
-
     );
 };
 

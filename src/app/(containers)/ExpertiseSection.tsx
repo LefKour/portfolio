@@ -85,9 +85,7 @@ const ExpertiseSection = () => {
         updateCanvasSize();
         window.addEventListener('resize', updateCanvasSize);
 
-        return () => {
-            window.removeEventListener('resize', updateCanvasSize);
-        };
+        return () => window.removeEventListener('resize', updateCanvasSize);
     }, [activeExpertiseIndex]);
 
     return (
@@ -95,14 +93,12 @@ const ExpertiseSection = () => {
                  className='relative m-0 p-0'>
             <h3 className="text-2xl font-light">Expertise</h3>
 
-            {/*Expertise Window*/}
-            <div className={"border border-neutral-500 rounded-lg h-[450px] p-4 mt-4 flex flex-col gap-4"}>
+            {/* Expertise Window */}
+            <div className={"border border-neutral-500 rounded-lg h-[450px] p-4 mt-4 flex flex-col gap-6"}>
                 <ul className={"flex gap-4"}>
                     <li className={`text-[0.75rem] p-2 border border-neutral-500 rounded-sm hover:bg-white/20 cursor-pointer
                     ${activeExpertiseIndex == 0 && "bg-white/20"}`}
-                        onClick={() => {
-                            setActiveExpertiseIndex(0);
-                        }}
+                        onClick={() => {setActiveExpertiseIndex(0);}}
                     >fullstack web development
                     </li>
                     <li className={`text-[0.75rem] p-2 border border-neutral-500 rounded-sm hover:bg-white/20 cursor-pointer

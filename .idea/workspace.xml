@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e06cead2-9e27-47ea-9bac-61bd971e49a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/(components)/HighlighSpan.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(containers)/WorkSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/about/Bio.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/about/Education.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/about/Publications.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/about/Talks.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/about/WorkExperience.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(components)/ExpertiseCard.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(components)/LayoutContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/LayoutContent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(components)/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(containers)/ContactSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/ContactSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(containers)/EngagementSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/EngagementSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(containers)/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/ExpertiseSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(containers)/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/HeroSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(containers)/WorkSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(containers)/EngagementSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/about/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/work/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/work/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/github-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/linkedin-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,11 +82,11 @@
       <recent name="C:\Dev\portfolio\src\app\(components)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Dev\portfolio\src\app\(containers)" />
+      <recent name="C:\Dev\portfolio\src\app\about" />
+      <recent name="C:\Dev\portfolio\src\app\(containers)\Home" />
       <recent name="C:\Dev\portfolio\src\lib\hooks" />
       <recent name="C:\Dev\portfolio\src\assets" />
-      <recent name="C:\Dev\portfolio\src\app" />
-      <recent name="C:\Dev\portfolio\src" />
-      <recent name="C:\Dev\portfolio" />
     </key>
   </component>
   <component name="RunManager">
@@ -153,7 +166,9 @@
       <workItem from="1760266005521" duration="1787000" />
       <workItem from="1760379222425" duration="8192000" />
       <workItem from="1760391219201" duration="2066000" />
-      <workItem from="1760425268950" duration="9857000" />
+      <workItem from="1760425268950" duration="19180000" />
+      <workItem from="1760480240434" duration="123000" />
+      <workItem from="1760514208458" duration="16474000" />
     </task>
     <servers />
   </component>

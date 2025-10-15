@@ -31,6 +31,28 @@ const NavBar = () => {
     const router = useRouter();
     const path = usePathname();
 
+    const handleContactClick = () => {
+        if (path !== '/') {
+            sessionStorage.setItem('scrollToContact', 'true');
+            router.push('/');
+        } else {
+            const contactSection = document.querySelector('[data-tag="contact-section"]');
+            contactSection?.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Check if we need to scroll after navigation
+    useEffect(() => {
+        if (path === '/' && sessionStorage.getItem('scrollToContact') === 'true') {
+            sessionStorage.removeItem('scrollToContact');
+
+            setTimeout(() => {
+                const contactSection = document.querySelector('[data-tag="contact-section"]');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+    }, [path]);
+
     return (
         <motion.div
             className={`fixed top-0 flex flex-col gap-10 p-4 pt-10 pb-10 justify-center select-none z-50`}
@@ -47,7 +69,12 @@ const NavBar = () => {
                 <NavBarItem name={"Home"} route={"/"} />
                 <NavBarItem name={"About"} route={"/about"} />
                 <NavBarItem name={"Work"} route={"/work"} />
-                <NavBarItem name={"Contact"} route={"/"} />
+                <li className={'inline-flex gap-2 items-center px-2 py-1 bg-white/20 border rounded-lg ' +
+                    'hover:bg-white/50 transition ease-in-out duration-100 cursor-pointer'}
+                    onClick={handleContactClick}
+                >
+                    <span className={"hover:font-bold transition"}>Contact</span>
+                </li>
             </ul>
 
             {/*Social Media Buttons*/}

@@ -54,7 +54,7 @@ const EngagementSection = () => {
             <h3 className="text-2xl font-light">Engagement</h3>
 
             {/* Positions */}
-            <div className="rounded-lg p-4 mt-4 flex flex-col gap-4">
+            <div className="rounded-lg p-4 mt-4 flex flex-col gap-4 min-h-100">
                 <div className="relative rounded-lg p-4 flex gap-4">
                     <div className={"absolute h-[1px] w-[65%] bg-white left-[50%] translate-x-[-50%] mt-2"}/>
 
@@ -121,9 +121,9 @@ const EngagementSection = () => {
 
                         <div className={"flex flex-col gap-2"}>
                             <label className={"text-sm text-neutral-300"}>tags:</label>
-                            <div className={"flex gap-2"}>
+                            <div className={"flex flex-wrap gap-2"}>
                                 {POSITION_DATA[positionIndex].tags.map((item, index) => {
-                                    return <label className={"font-light text-sm p-2 border border-neutral-500 rounded-lg bg-white/20"} >{item}</label>
+                                    return <label key={index} className={"font-light text-sm p-2 border border-neutral-500 rounded-lg bg-white/20"} >{item}</label>
                                 })}
                             </div>
                         </div>

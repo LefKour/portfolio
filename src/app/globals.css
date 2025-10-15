@@ -8,7 +8,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #262626;
     --foreground: #ededed;
   }
 }
@@ -27,4 +27,19 @@ html, body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@keyframes pulseGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.5;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
+
+.animate-pulse-gradient {
+  animation: pulseGradient 10s ease-in-out infinite;
 }
